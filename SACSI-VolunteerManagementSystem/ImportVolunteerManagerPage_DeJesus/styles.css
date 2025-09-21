@@ -1,0 +1,661 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    padding-top: 80px; /* For fixed header */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.database-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 1000;
+    background-color: #B2000C;
+    color: white;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    border-left: 0.2rem solid black; /* Black by default */
+    border-bottom: 0.2rem solid black;
+    transform: rotate(45deg);
+    transition: border-color 0.3s ease;
+}
+
+.back-button:hover .arrow-icon {
+    border-left-color: white; /* White on hover */
+    border-bottom-color: white;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-actions {
+    margin-left: 2rem;
+}
+
+.header-content h1 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+}
+
+/* Scroll Container */
+.scroll-container {
+    flex: 1;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Section Styles - Fixed height accounting for header */
+section {
+    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0;
+}
+
+/* Database Container */
+.database-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 0 1rem;
+}
+
+/* Main Content */
+.database-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Import Section */
+.import-section {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    animation: slideUp 0.8s ease-out forwards;
+    margin-top: 1rem;
+}
+
+.import-section h2 {
+    color: #c41e3a;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.import-section a {
+    color: #495057;
+    text-decoration: none;
+}
+
+/* Import Controls */
+.import-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: end;
+}
+
+.file-upload label {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.file-upload input {
+    display: none;
+    background: #e0e0e0;
+}
+
+.file-path {
+    background: #e0e0e0;
+    font-size: 0.9rem;
+    color: #495057;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    flex-grow: 1;
+    min-width: 500px;
+}
+
+.uploader-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 100px;
+}
+
+.uploader-info label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+}
+
+.uploader-info input {
+    width: 200px;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.uploader-info input.form-control:focus {
+    background-color: #d3d3d3; /* gray while typing */
+    color: #000;              /* keep text readable */
+    outline: none;            /* remove browser outline */
+    box-shadow: none;         /* remove Bootstrap blue glow */
+    border-color: #aaa;       /* optional: neutral border */
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.import-btn, .undo-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.import-btn {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.undo-btn {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+/* Action Message */
+.action-message {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Data Table */
+.data-table-container {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: 1rem;
+}
+
+.table-responsive {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ced4da #f1f1f1;
+}
+
+.volunteer-table {
+    min-width: 100%;
+    border-collapse: separate;
+}
+
+.volunteer-table thead {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    font-weight: 600;
+}
+
+.volunteer-table thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #ced4da;
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
+
+.volunteer-table tbody.tr:only-child {
+    height: 200px;
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.table-controls h3 {
+    color: #c41e3a;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.table-actions button {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #e9ecef;
+    color: #333;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.volunteer-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    background-color: white;
+    overflow: visible !important;
+}
+
+.volunteer-table th {
+    background-color: #f8f9fa;
+    color: #666;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 500;
+}
+
+.volunteer-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: top;
+    overflow: visible !important;
+    position: static;
+}
+
+.volunteer-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.volunteer-table input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Action Dropdown */
+.action-dropdown {
+    position: relative;
+    display: inline-block;
+    gap: 2rem;
+}
+
+.action-button {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Submit Section */
+.submit-section {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.submit-section button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.view-invalid, .view-logs {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.spacer {
+    width: 1px;
+    height: 24px;
+    margin: 0 0.8rem;
+}
+
+.undo-transfer {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.undo-transfer:hover {
+    background-color: #D9D9D9;
+    color: #333;
+}
+
+.view-invalid:hover, .view-logs:hover {
+    background-color: #D9D9D9;
+    color: #333;
+}
+
+.submit-database {
+    background-color: #c41e3a;
+    color: white;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px; /* Slightly more padding for mobile */
+    }
+
+    section {
+        height: calc(100vh - 70px);
+        min-height: calc(100vh - 70px);
+        max-height: calc(100vh - 70px);
+    }
+
+    .scroll-container {
+        height: calc(100vh - 70px);
+    }
+
+    .database-header {
+        height: 70px;
+        padding: 0.8rem 1rem;
+        gap: 1rem;
+    }
+
+    .header-content h1 {
+        font-size: 1.3rem;
+    }
+
+    .database-main {
+        padding: 0.8rem;
+    }
+
+    .import-section {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .import-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.8rem;
+    }
+
+    .file-path {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .action-buttons {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .action-buttons button {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .volunteer-table {
+        font-size: 0.8rem;
+    }
+
+    .volunteer-table th,
+    .volunteer-table td {
+        padding: 0.6rem 0.4rem;
+        white-space: nowrap;
+    }
+
+    .table-responsive {
+        border: none;
+        box-shadow: none;
+    }
+
+    .submit-section {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .submit-section button {
+        width: 100%;
+        padding: 0.6rem;
+    }
+
+    .action-message {
+        font-size: 0.8rem;
+        padding: 0.8rem;
+    }
+
+    .data-table-container {
+        min-height: 250px; /* Minimum height for tables */
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding-top: 60px;
+    }
+
+    section {
+        height: calc(100vh - 60px);
+        min-height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+    }
+
+    .scroll-container {
+        height: calc(100vh - 60px);
+    }
+
+    .database-header {
+        height: 60px;
+        padding: 0.5rem;
+    }
+
+    .header-content h1 {
+        font-size: 1.1rem;
+    }
+
+    .database-main {
+        padding: 0.5rem;
+    }
+
+    .import-section {
+        padding: 0.8rem;
+    }
+
+    .import-controls {
+        gap: 0.5rem;
+    }
+
+    .volunteer-table {
+        min-width: 100%;
+        font-size: 0.7rem;
+    }
+
+    .volunteer-table th,
+    .volunteer-table td {
+        padding: 0.4rem 0.3rem;
+        min-width: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .data-table-container {
+        max-height: calc(100vh - 250px);
+        min-height: 200px;
+    }
+
+    .table-controls h3 {
+        font-size: 1.1rem;
+    }
+
+    .submit-section button {
+        font-size: 0.8rem;
+    }
+
+    /* Horizontal scroll container for tables */
+    .table-scroll-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+    }
+
+    .volunteer-table {
+        width: auto;
+        min-width: 800px;
+        display: block;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+    .database-header {
+        height: 50px;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .header-content {
+        gap: 0.5rem;
+    }
+
+    .header-content h1 {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .back-button {
+        margin-right: 0.5rem;
+    }
+
+    .header-actions {
+        margin-left: 0.5rem;
+    }
+
+    .import-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .submit-section {
+        gap: 0.3rem;
+    }
+
+    .volunteer-table td {
+        min-width: 50px;
+    }
+
+    .data-table-container {
+        min-height: 180px;
+    }
+}

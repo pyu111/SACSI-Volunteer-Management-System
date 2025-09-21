@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Creation Page</title>
+  <link rel="stylesheet" href="./styles - Copy.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!--Hamburger Navbar-->
+    <header class="database-header">
+        <div class="header-content">
+            <button class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Database Management</h1>
+            <div class="header-actions">
+                <div class="dropdown action-dropdown">
+                    <button class="btn btn-lg btn-outline-text-light dropdown-toggle action-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Home</a></li>
+                        <li><a class="dropdown-item" href="#">Student Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Student Profile Manager</a></li>
+                        <li><a class="dropdown-item" href="#">Import Volunteer</a></li>
+                        <li><a class="dropdown-item" href="#">Create Event</a></li>
+                        <li><a class="dropdown-item" href="#">Event Manager</a></li>
+                        <li><a class="dropdown-item" href="#">Summary Report</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  <div class="event-card">
+    <div class="input-box">
+      <input type="text" placeholder="Event Title">
+    </div>
+
+    <div class="row">
+      <div class="input-box">
+        <span class="icon">🕒</span>
+        <input type="text" placeholder="08:00 AM - 12:00 NN">
+      </div>
+      <div class="input-box">
+        <span class="icon">📍</span>
+        <input type="text" placeholder="Lantaka Campus">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-box">
+        <span class="icon">👤</span>
+        <input type="text" placeholder="Event Organizer(s)">
+      </div>
+      <div class="input-box">
+        <span class="icon">📞</span>
+        <input type="text" placeholder="Event Organizer Contact">
+      </div>
+    </div>
+
+    <div class="description-box">
+      <textarea placeholder="Description"></textarea>
+    </div>
+
+    <button class="create-btn">Create Event</button>
+  </div>
+
+  <!-- Bootstrap 5 JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

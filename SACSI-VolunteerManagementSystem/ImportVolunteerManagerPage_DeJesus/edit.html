@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            padding-top: 80px; /* For fixed header */
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            height: calc(100vh - 80px);
+            min-height: calc(100vh - 80px);
+            max-height: calc(100vh - 80px);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            position: relative;
+            border-left: 0.2rem solid black; /* Black by default */
+            border-bottom: 0.2rem solid black;
+            transform: rotate(45deg);
+            transition: border-color 0.3s ease;
+        }
+
+        .back-button:hover .arrow-icon {
+            border-left-color: white; /* White on hover */
+            border-bottom-color: white;
+        }
+
+        /* Header Styles */
+        .database-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            z-index: 1000;
+            background-color: #B2000C;
+            color: white;
+            padding: 1rem 2rem;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-actions {
+            margin-left: 2rem;
+        }
+
+        .header-content h1 {
+            flex: 1;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Database Container */
+        .database-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            background-color: #fff;
+            overflow: hidden;
+            padding: 0 1rem;
+        }
+
+        /* Main Content */
+        .database-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Import Section */
+        .edit-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out forwards;
+            margin-top: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: fit-content; /* Or a specific width */
+            max-width: 100%; /* Ensure it doesn't overflow parent */
+        }
+
+        .edit-section h2 {
+            color: #c41e3a;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        /* Submit Section */
+        .submit-section {
+            display: flex;
+            justify-content: center; /* This centers the buttons horizontally */
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
+        .submit-section button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .volunteer-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .volunteer-info label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            gap: 1rem 2rem; /* row gap, column gap */
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .volunteer-info input {
+            width: 100%; /* Make inputs fill their container */
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+
+        .volunteer-info input.form-control:focus {
+            background-color: #d3d3d3; /* gray while typing */
+            color: #000;              /* keep text readable */
+            outline: none;            /* remove browser outline */
+            box-shadow: none;         /* remove Bootstrap blue glow */
+            border-color: #aaa;       /* optional: neutral border */
+        }
+
+        .volunteer-info.form-check {
+            display: flex;                 /* align checkbox + label side by side */
+            align-items: center;
+            grid-column: span 2;           /* make it take the full row */
+            padding-left: 0 !important;    /* override Bootstrap's default padding */
+        }
+
+        .custom-checkbox {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;            /* space before label */
+            accent-color: #5a765a;         /* modern browsers: custom checkbox color */
+            cursor: pointer;
+        }
+
+        .volunteer-info.form-check label {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--Hamburger Navbar-->
+    <header class="database-header">
+        <div class="header-content">
+            <button class="back-button" onclick="window.location.href='./ImportVolunteerManagerPage.html'">
+            <span class="arrow-icon"></span>
+        </button>
+
+
+            <h1>Database Management</h1>
+            <div class="header-actions">
+                <div class="dropdown action-dropdown">
+                    <button class="btn btn-lg btn-outline-text-light dropdown-toggle action-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Home</a></li>
+                        <li><a class="dropdown-item" href="#">Student Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Student Profile Manager</a></li>
+                        <li><a class="dropdown-item" href="#">Import Volunteer</a></li>
+                        <li><a class="dropdown-item" href="#">Create Event</a></li>
+                        <li><a class="dropdown-item" href="#">Event Manager</a></li>
+                        <li><a class="dropdown-item" href="#">Summary Report</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+     <section id="edit-Section">
+        <div class="database-container">
+            <main class="database-main">
+                <div class="edit-section">
+                    <h2>Edit Student Volunteer Data</h2>
+
+                    <!-- Added input-grid container -->
+                    <div class="input-grid">
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Fullname" placeholder="Volunteer-Fullname">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-IDNumber" placeholder="Volunteer-IDNumber">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Course" placeholder="Volunteer-Course">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Year" placeholder="Volunteer-Year">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Contact#" placeholder="Volunteer-Contact#">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Emg#" placeholder="Volunteer-Emg#">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Email" placeholder="Volunteer-Email">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-FBLink" placeholder="Volunteer-FBLink">
+                        </div>
+                        <div class="volunteer-info mb-3">
+                            <input type="text" class="form-control" id="Volunteer-Barangay" placeholder="Volunteer-Barangay">
+                        </div>
+                    </div>
+
+                     <div class="volunteer-info mb-3 form-check">
+                        <input type="checkbox" class="custom-checkbox" id="Volunteer-Status">
+                        <label class="form-check-label" for="Volunteer-Status">Active Volunteer</label>
+                        </div>
+                    <div class="submit-section">
+                        <button class="btn btn-danger submit-database">Apply Changes</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+</body>
+</html>
