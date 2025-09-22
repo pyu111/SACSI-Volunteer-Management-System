@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Management - Import CVs</title>
+    <link rel="stylesheet" href="./styles.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!--Hamburger Navbar-->
+    <header class="database-header">
+        <div class="header-content">
+            <button class="back-button" onclick="window.location.href='../home_page_Yu/index.html'">
+                <i class='fas fa-long-arrow-alt-left' style='font-size:36px'></i>
+            </button>
+
+            <h1>Event Manager</h1>
+        
+            <div class="header-actions">
+                <div class="dropdown action-dropdown">
+                <button class="btn btn-lg btn-outline-text-light dropdown-toggle action-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                    <span class="visually-hidden">Toggle menu</span>
+                </button>
+
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Home</a></li>
+                    <li><a class="dropdown-item" href="#">Student Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Student Profile Manager</a></li>
+                    <li><a class="dropdown-item" href="#">Import Volunteer</a></li>
+                    <li><a class="dropdown-item" href="#">Create Event</a></li>
+                    <li><a class="dropdown-item" href="#">Event Manager</a></li>
+                    <li><a class="dropdown-item" href="#">Summary Report</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+        <section id="import-Section">
+            <div class="database-container">
+                <!--Import-Section-Card-->
+                <main class="database-main">
+                    <div class="import-section">
+                        <div class="data-table-container">
+                            <div class="action-message">
+                                Action Message Here
+                            </div>
+                            <div class="table-controls mb-3">
+                                <div class="table-actions">
+                                    <button class="btn btn-outline-secondary btn-sm undo-delete">Undo Delete</button>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="volunteer-table">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" class="select-all-checkbox"></th>
+                                            <th>ID</th>
+                                            <th>Full Name</th>
+                                            <th>ID Num</th>
+                                            <th>Course</th>
+                                            <th>Year</th>
+                                            <th>Contact #</th>
+                                            <th>Emg #</th>
+                                            <th>Email</th>
+                                            <th>FB/Messenger</th>
+                                            <th>Barangay</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>1</td>
+                                            <td>David, John J. De Jesus</td>
+                                            <td>230046</td>
+                                            <td>BSIT</td>
+                                            <td>3</td>
+                                            <td>09653747639</td>
+                                            <td>09653747639</td>
+                                            <td>Co230046@adzu.edu.ph</td>
+                                            <td>Https://Facebook.com</td>
+                                            <td>Sta.Maria</td>
+                                            <th>Activite</th>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary action-button" onclick="window.location.href='./edit-Valid-Volunteer.php'">
+                                                    Edit
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        
+                                        
+                                        <!-- Additional rows would be added here dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+        
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+</body>
+</html>
